@@ -1,3 +1,7 @@
+Note
+-----------
+This repo is cloned from `channels-api <https://github.com/linuxlewis/channels-api>`__
+
 Channels API
 ------------
 
@@ -60,13 +64,13 @@ This tutorial assumes you're familiar with channels and have completed
 the `Getting
 Started <https://channels.readthedocs.io/en/latest/getting-started.html>`__
 
--  Add ``channels_api`` to requirements.txt
+-  Add ``channels_framework`` to requirements.txt
 
 .. code:: bash
 
-  pip install channels_api
+  pip install channels_framework
 
--  Add ``channels_api`` to ``INSTALLED_APPS``
+-  Add ``channels_framework`` to ``INSTALLED_APPS``
 
 .. code:: python
 
@@ -74,7 +78,7 @@ Started <https://channels.readthedocs.io/en/latest/getting-started.html>`__
     INSTALLED_APPS = (
         'rest_framework',
         'channels',
-        'channels_api'
+        'channels_framework'
     )
 
 -  Add a ``WebsocketDemultiplexer`` to your ``channel_routing``
@@ -104,7 +108,7 @@ Started <https://channels.readthedocs.io/en/latest/getting-started.html>`__
 
     # polls/bindings.py
 
-    from channels_api.bindings import ResourceBinding
+    from channels_framework.bindings import ResourceBinding
 
     from .models import Question
     from .serializers import QuestionSerializer
@@ -176,7 +180,7 @@ response. It is only designed to be used when ``DEBUG=TRUE``.
     from django.conf.urls import include
 
         urlpatterns = [
-            url(r'^channels-api/', include('channels_api.urls'))
+            url(r'^channels-api/', include('channels_framework.urls'))
         ]
 
 ResourceBinding
@@ -206,7 +210,7 @@ You can configure the ``DEFAULT_PAGE_SIZE`` by overriding the settings.
 
   # settings.py
 
-  CHANNELS_API = {
+  channels_framework = {
     'DEFAULT_PAGE_SIZE': 25
   }
 
