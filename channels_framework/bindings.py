@@ -1,17 +1,17 @@
 from channels.binding import websockets
-
-from django.db import models
 from django.core.exceptions import ObjectDoesNotExist
 
 from rest_framework.exceptions import APIException, NotFound
 
-from .mixins import SerializerMixin, SubscribeModelMixin, CreateModelMixin, UpdateModelMixin, \
+from .mixins import SerializerMixin, SubscribeModelMixin, \
+    CreateModelMixin, UpdateModelMixin, \
     RetrieveModelMixin, ListModelMixin, DeleteModelMixin
 
 
 class ResourceBindingBase(SerializerMixin, websockets.WebsocketBinding):
 
-    available_actions = ('create', 'retrieve', 'list', 'update', 'delete', 'subscribe')
+    available_actions = ('create', 'retrieve', 'list',
+                         'update', 'delete', 'subscribe')
     fields = []  # hack to pass cls.register() without ValueError
     queryset = None
     # mark as abstract
@@ -80,13 +80,16 @@ class ResourceBindingBase(SerializerMixin, websockets.WebsocketBinding):
                 data, status = getattr(self, action)(pk)
             elif action in ('update', 'subscribe'):
                 data, status = getattr(self, action)(pk, data)
-            self.reply(action, data=data, status=status, request_id=self.request_id)
+            self.reply(action, data=data, status=status,
+                       request_id=self.request_id)
         except APIException as ex:
-            self.reply(action, errors=self._format_errors(ex.detail), status=ex.status_code, request_id=self.request_id)
+            self.reply(action, errors=self._format_errors(ex.detail),
+                       status=ex.status_code, request_id=self.request_id)
 
     def reply(self, action, data=None, errors=[], status=200, request_id=None):
         """
-        Helper method to send a encoded response to the message's reply_channel.
+        Helper method to send a encoded
+        response to the message's reply_channel.
         """
         payload = {
             'errors': errors,
@@ -95,16 +98,20 @@ class ResourceBindingBase(SerializerMixin, websockets.WebsocketBinding):
             'response_status': status,
             'request_id': request_id
         }
-        return self.message.reply_channel.send(self.encode(self.stream, payload))
+        return self.message.reply_channel.send(
+            self.encode(self.stream, payload))
+
 
 class ResourceBinding(CreateModelMixin, RetrieveModelMixin, ListModelMixin,
-    UpdateModelMixin, DeleteModelMixin, SubscribeModelMixin, ResourceBindingBase):
+                      UpdateModelMixin, DeleteModelMixin,
+                      SubscribeModelMixin, ResourceBindingBase):
 
     # mark as abstract
     model = None
 
+
 class ReadOnlyResourceBinding(RetrieveModelMixin, ListModelMixin,
-    ResourceBindingBase):
+                              ResourceBindingBase):
 
     # mark as abstract
     model = None

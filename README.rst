@@ -64,11 +64,11 @@ This tutorial assumes you're familiar with channels and have completed
 the `Getting
 Started <https://channels.readthedocs.io/en/latest/getting-started.html>`__
 
--  Add ``channels_framework`` to requirements.txt
+-  Add ``channelsrestframework`` to requirements.txt
 
 .. code:: bash
 
-  pip install channels_framework
+  pip install channelsrestframework
 
 -  Add ``channels_framework`` to ``INSTALLED_APPS``
 

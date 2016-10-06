@@ -4,6 +4,7 @@ from rest_framework.exceptions import ValidationError
 
 from .settings import api_settings
 
+
 class CreateModelMixin(object):
     """Mixin class that handles the creation of an object using a DRF serializer."""
 
@@ -15,6 +16,7 @@ class CreateModelMixin(object):
 
     def perform_create(self, serializer):
         serializer.save()
+
 
 class RetrieveModelMixin(object):
 
@@ -58,6 +60,7 @@ class DeleteModelMixin(object):
 
     def perform_delete(self, instance):
         instance.delete()
+
 
 class SubscribeModelMixin(object):
 
