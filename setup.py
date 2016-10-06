@@ -7,6 +7,7 @@ setup(
     url='https://github.com/madra/channels-rest-framework',
     author='Madra David',
     author_email='david@madradavid.com',
+    download_url='https://github.com/madra/channels-rest-framework/tarball/0.1',
     description="Build a RESTful API on top of WebSockets using Django channels and Django Rest Framework.",
     license='BSD',
     packages=find_packages(),
@@ -17,7 +18,7 @@ setup(
         'djangorestframework>=3.0'
     ],
     classifiers=[
-        'Development Status :: 1 - Production/Stable',
+        'Development Status :: 5 - Production/Stable',
         'Environment :: Web Environment',
         'Framework :: Django',
         'Intended Audience :: Developers',
