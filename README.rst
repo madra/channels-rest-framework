@@ -257,11 +257,3 @@ with the parameters to filter
       }
     }
   }
-
-Roadmap
--------
-
--  0.3
-    -  Permissions
-    -  Custom Methods
-    -  Test Project
